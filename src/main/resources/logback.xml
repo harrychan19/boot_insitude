@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration >
+    <!--<jmxConfigurator />-->
+    <property name="log_path" value="d:/logs/boot_insitude" />
+    <property name="log_name" value="web_log" />
+    <property name="log_level_info" value="INFO"/>
+    <property name="log_level_debug" value="DEBUG"/>
+    <property name="log_level_error" value="error"/>
+
+    <contextName>${log_name}</contextName>
+
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.err</Target>
+        <encoder>
+            <pattern>%date [%level] [%file :%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--&lt;!&ndash; 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件压缩(.zip)备份)&ndash;&gt;-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log_path}/web_log.log</File>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/web_log/%d{yyyy-MM}/web_log_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6240KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/error_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/error_log/%d{yyyy-MM}/error_log_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="info_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/info_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/info_log/%d{yyyy-MM}/info_log_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="debug_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/debug_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/debug_log/%d{yyyy-MM}/debug_log%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <appender name="sql_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/sql_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/sql_log/%d{yyyy-MM}/sql_log%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <appender name="mq_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/mq_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/mq_log/%d{yyyy-MM}/mq_log_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <appender name="push_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level> <!-- 指定要对级别为ERROR日志信息过滤 -->
+            <onMismatch>DENY</onMismatch>     <!-- 如果不匹配，则拒绝处理 -->
+            <onMatch>ACCEPT</onMatch>         <!-- 如果匹配，则立即处理 -->
+        </filter>
+        <file>${log_path}/push_log.log</file> <!-- 文件名即路径 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/push_log/%d{yyyy-MM}/push_log_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>6024KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%level][%file :%line] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <logger name="com.hsh" level="${log_level_debug}" additivity="false">
+        <appender-ref ref="debug_log"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="info_log"/>
+    </logger>
+
+    <root level="${log_level_info}">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

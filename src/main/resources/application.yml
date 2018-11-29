@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: boot_insitude
+  # mongo dataSource config
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: blog
+
+  jackson:
+    default-property-inclusion: non_empty
+
+  # multiDataSource config
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    primary:
+      url: jdbc:mysql://localhost:3306/primary
+      username: root
+      password: 1234
+      driverClass: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+
+    second:
+      url: jdbc:mysql://localhost:3306/slave
+      username: root
+      password: 1234
+      driverClass: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+
+  #rabbitmq config
+  rabbitmq:
+    host: 211.159.161.12
+    port: 5672
+    username: hsh
+    password: 123456
+    virtual-host: /
+
+  redis:
+    host: 192.168.61.2
+    port: 6379
+    database: 6
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 500
+        max-wait: 1
+        min-idle: 0
+    timeout: 5000
+    cluster:
+      max-redirects: 3
+      nodes: 192.168.61.2:6379,192.168.61.61:6379,103.10.87.235:6379
+
+  #elasticsearch config
+  elasticsearch:
+    jest:
+      uris: http://47.104.158.165:9200
+      connection-timeout: 10000
+      multi-threaded: true
+
+# server port
+server:
+  port: 9099
+
+# logging xml config location
+logging:
+  config: classpath:logback.xml
+
+# dubbo config
+dubbo:
+  application:
+    name: boot_provider
+  scan:
+    package: com.hsh.dubbo
+  registry:
+    address: zookeeper://211.159.161.12:2181
+  protocol:
+    name: dubbo
+    port: 20880
