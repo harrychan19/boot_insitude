@@ -14,20 +14,46 @@ spring:
   # multiDataSource config
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    primary:
-      url: jdbc:mysql://localhost:3306/primary
-      username: root
-      password: 1234
-      driverClass: com.mysql.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      primary:
+        url: jdbc:mysql://localhost:3306/primary
+        username: root
+        password: 1234
+        driverClass: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
 
-    second:
-      url: jdbc:mysql://localhost:3306/slave
-      username: root
-      password: 1234
-      driverClass: com.mysql.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-
+      slave:
+        url: jdbc:mysql://localhost:3306/slave
+        username: root
+        password: 1234
+        driverClass: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+          enabled: true
+          url-pattern: /druid/*
+          login-username: admin
+          login-password: admin
+      filter:
+          stat:
+              log-slow-sql: true
+              slow-sql-millis: 1000
+              merge-sql: true
+          wall:
+              config:
+                  multi-statement-allow: true
+                  none-base-statement-allow: true
   #rabbitmq config
   rabbitmq:
     host: 211.159.161.12
@@ -77,3 +103,6 @@ dubbo:
   protocol:
     name: dubbo
     port: 20880
+
+mybatis:
+  mapper-locations: com/hsh/mapping/*.xml

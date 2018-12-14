@@ -1,6 +1,8 @@
 package com.hsh.service.primary;
 
-import com.hsh.dao.primary.PrimaryStudentDao;
+import com.hsh.common.annos.DataSource;
+import com.hsh.common.config.DataSourceNames;
+import com.hsh.dao.PrimaryStudentDao;
 import com.hsh.domain.primary.PrimaryStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class PrimaryStudentQueryService {
      * @params:[]
      * @return : java.util.List<com.hsh.domain.primary.PrimaryStudent>
      */
+    @DataSource(name = DataSourceNames.FIRST)
     public List<PrimaryStudent> getStudents() {
         return primaryStudentDao.getStudents();
     }

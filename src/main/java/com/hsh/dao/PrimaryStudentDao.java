@@ -1,4 +1,4 @@
-package com.hsh.dao.primary;
+package com.hsh.dao;
 
 import com.hsh.domain.primary.PrimaryStudent;
 import org.springframework.stereotype.Repository;
