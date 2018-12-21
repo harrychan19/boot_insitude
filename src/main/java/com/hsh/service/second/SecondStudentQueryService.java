@@ -14,6 +14,7 @@ import java.util.List;
  * @version V1.0, 2018/11/8
  */
 @Service
+@DataSource(name = DataSourceNames.SECOND)
 public class SecondStudentQueryService {
 
     @Autowired
@@ -26,7 +27,6 @@ public class SecondStudentQueryService {
      * @params:[]
      * @return : java.util.List<com.hsh.domain.primary.PrimaryStudent>
      */
-    @DataSource(name = DataSourceNames.SECOND)
     public List<PrimaryStudent> getStudents() {
         return secondStudentDao.getStudents();
     }
