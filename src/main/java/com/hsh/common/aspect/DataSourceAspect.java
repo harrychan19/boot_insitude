@@ -36,6 +36,11 @@ public class DataSourceAspect implements Ordered {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
         DataSource ds = method.getAnnotation(DataSource.class);
+        //以方法级别为准，如方法未注解数据源，则以类为准
+        if (ds != null) {
+            ds = point.getTarget().getClass().getAnnotation(DataSource.class);
+        }
+        //如均未添加注解，则以主数据源为准
         if (ds == null) {
             DynamicDataSource.setDataSource(DataSourceNames.FIRST);
             logger.debug("set datasource is " + DataSourceNames.FIRST);
