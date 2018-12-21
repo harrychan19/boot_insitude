@@ -739,7 +739,8 @@ public class JestService {
         //QueryBuilder queryBuilder = QueryBuilders.wildcardQuery(field+".keyword", "*"+keyWord+"*");
         QueryBuilder queryBuilder = QueryBuilders.wildcardQuery(field, "*" + keyWord + "*");
         //QueryBuilder queryBuilder = QueryBuilders.matchQuery(field,keyWord);
-        searchSourceBuilder.query(queryBuilder).size(MAX_SIZE);
+        //分页查询
+        searchSourceBuilder.query(queryBuilder).size(MAX_SIZE).from(0).size(1);
         String query = searchSourceBuilder.toString();
         System.out.println(query);
 

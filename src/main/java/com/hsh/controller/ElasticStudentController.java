@@ -89,8 +89,9 @@ public class ElasticStudentController {
                     ElasticIndexConfig.STU,
                     "name",
                     name);
+            Long total = result.getTotal();
             List<ElasticStudent> students = result.getSourceAsObjectList(ElasticStudent.class, false);
-            esPage = new EsPage(0,5,100,students);
+            esPage = new EsPage(0,5,total.intValue(),students);
         } catch (Exception e) {
             e.printStackTrace();
             return RestResult.failed(ResultCode.INTERFACE_INNER_INVOKE_ERROR);
