@@ -27,13 +27,19 @@ public class DruidDataSourceConfig {
     public DataSource slaveDataSource() {
         return DruidDataSourceBuilder.create().build();
     }
+    @Bean(name = "logDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.job-log")
+    public DataSource logDataSource() {
+        return DruidDataSourceBuilder.create().build();
+    }
 
     @Bean
     @Primary
-    public DynamicDataSource dataSource(DataSource primaryDataSource, DataSource slaveDataSource) {
-        Map<String, DataSource> targetDataSources = new HashMap<>(2);
+    public DynamicDataSource dataSource(DataSource primaryDataSource, DataSource slaveDataSource,DataSource logDataSource) {
+        Map<String, DataSource> targetDataSources = new HashMap<>(3);
         targetDataSources.put(DataSourceNames.FIRST, primaryDataSource);
         targetDataSources.put(DataSourceNames.SECOND, slaveDataSource);
+        targetDataSources.put(DataSourceNames.JOB_LOG, logDataSource);
         return new DynamicDataSource(primaryDataSource, targetDataSources);
     }
 }

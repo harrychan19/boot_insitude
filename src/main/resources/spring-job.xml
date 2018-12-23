@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.dangdang.com/schema/ddframe/reg
+http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+http://www.dangdang.com/schema/ddframe/job
+http://www.dangdang.com/schema/ddframe/job/job.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:zookeeper.properties"/>
+    <!--配置作业注册中心 -->
+    <reg:zookeeper id="regCenter" server-lists="${regcenter.zookeeper.serverList}"
+                   namespace="${regcenter.zookeeper.namespace}"
+                   base-sleep-time-milliseconds="${regcenter.zookeeper.base.sleep.time.milliseconds}"
+                   max-sleep-time-milliseconds="${regcenter.zookeeper.max.sleep.time.milliseconds}"
+                   max-retries="${regcenter.zookeeper.max.retries}" />
+
+
+    <!-- 第一个Elastic-Job分片定时任务 -->
+    <job:simple id="mySimpleJob" class="com.hsh.service.job.QueryJob"
+                registry-center-ref="regCenter"
+                cron="0 0/10 * * * ?"
+                sharding-total-count="1"
+                sharding-item-parameters="0=A"
+                description="queryJob"
+                event-trace-rdb-data-source="logDataSource"
+                overwrite="true"/>
+</beans>

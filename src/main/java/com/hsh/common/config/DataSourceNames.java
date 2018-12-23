@@ -7,4 +7,5 @@ package com.hsh.common.config;
 public interface DataSourceNames {
     String FIRST = "primary";
     String SECOND = "slave";
+    String JOB_LOG = "jobLog";
 }

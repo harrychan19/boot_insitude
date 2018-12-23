@@ -28,6 +28,13 @@ spring:
         password: 1234
         driverClass: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
+
+      job-log:
+        url: jdbc:mysql://localhost:3306/job_log
+        username: root
+        password: 1234
+        driverClass: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
       initial-size: 10
       max-active: 100
       min-idle: 10
@@ -103,6 +110,8 @@ dubbo:
   protocol:
     name: dubbo
     port: 20880
+
+
 
 mybatis:
   mapper-locations: com/hsh/mapping/*.xml
