@@ -16,23 +16,23 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       primary:
-        url: jdbc:mysql://localhost:3306/primary
+        url: jdbc:mysql://47.104.158.165:3306/primary
         username: root
-        password: 1234
+        password: Shihai123.
         driverClass: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
 
       slave:
-        url: jdbc:mysql://localhost:3306/slave
+        url: jdbc:mysql://47.104.158.165:3306/slave
         username: root
-        password: 1234
+        password: Shihai123.
         driverClass: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
 
       job-log:
-        url: jdbc:mysql://localhost:3306/job_log
+        url: jdbc:mysql://47.104.158.165:3306/job_log
         username: root
-        password: 1234
+        password: Shihai123.
         driverClass: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
       initial-size: 10
@@ -63,14 +63,14 @@ spring:
                   none-base-statement-allow: true
   #rabbitmq config
   rabbitmq:
-    host: 211.159.161.12
+    host: 47.104.158.165
     port: 5672
-    username: hsh
+    username: root
     password: 123456
     virtual-host: /
 
   redis:
-    host: 192.168.61.2
+    host: 47.104.158.165
     port: 6379
     database: 6
     jedis:
@@ -82,7 +82,7 @@ spring:
     timeout: 5000
     cluster:
       max-redirects: 3
-      nodes: 192.168.61.2:6379,192.168.61.61:6379,103.10.87.235:6379
+      nodes: 47.104.158.165:6379
 
   #elasticsearch config
   elasticsearch:
@@ -90,6 +90,8 @@ spring:
       uris: http://47.104.158.165:9200
       connection-timeout: 10000
       multi-threaded: true
+      username:
+      password:
 
 # server port
 server:
@@ -106,7 +108,7 @@ dubbo:
   scan:
     package: com.hsh.dubbo
   registry:
-    address: zookeeper://211.159.161.12:2181
+    address: zookeeper://47.104.158.165:2181
   protocol:
     name: dubbo
     port: 20880
