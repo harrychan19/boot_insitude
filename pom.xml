@@ -213,13 +213,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.yml</include>
-                    <include>**/*.properties</include>
-                </includes>
-                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
     </build>
