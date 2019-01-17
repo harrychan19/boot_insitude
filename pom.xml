@@ -213,7 +213,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main</directory>
             </resource>
         </resources>
     </build>
