@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration >
     <!--<jmxConfigurator />-->
-    <property name="log_path" value="/logs/boot_insitude" />
+    <property name="log_path" value="logs/boot_insitude" />
     <property name="log_name" value="web_log" />
     <property name="log_level_info" value="INFO"/>
     <property name="log_level_debug" value="DEBUG"/>
