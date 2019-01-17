@@ -95,7 +95,7 @@ spring:
 
 # server port
 server:
-  port: 9099
+  port: 9091
 
 # logging xml config location
 logging:
