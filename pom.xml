@@ -204,6 +204,7 @@
     </dependencies>
 
     <build>
+        <finalName>boot_insitude</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
