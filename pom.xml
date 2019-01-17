@@ -219,7 +219,7 @@
                     <include>**/*.yml</include>
                     <include>**/*.properties</include>
                 </includes>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
