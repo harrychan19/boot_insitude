@@ -10,6 +10,8 @@ import io.searchbox.core.SearchResult;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,8 @@ public class ElasticStudentController {
 
     @Autowired
     JestService jestService;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /** 增加 */
     @PostMapping("/insertElasticStudent")
@@ -93,7 +97,7 @@ public class ElasticStudentController {
             List<ElasticStudent> students = result.getSourceAsObjectList(ElasticStudent.class, false);
             esPage = new EsPage(0,5,total.intValue(),students);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("aaaa",e);
             return RestResult.failed(ResultCode.INTERFACE_INNER_INVOKE_ERROR);
         }
         return RestResult.success(esPage);
