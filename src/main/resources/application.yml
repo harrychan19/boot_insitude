@@ -4,7 +4,7 @@ spring:
   # mongo dataSource config
   data:
     mongodb:
-      host: localhost
+      host: 47.104.158.165
       port: 27017
       database: blog
 
@@ -95,7 +95,7 @@ spring:
 
 # server port
 server:
-  port: 9099
+  port: 9091
 
 # logging xml config location
 logging:
