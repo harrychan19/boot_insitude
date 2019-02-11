@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @AllArgsConstructor
 @Data
-@Document(collection = "chat_log")
 public class Message {
 
     public static final String ENTER = "ENTER";

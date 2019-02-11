@@ -21,9 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketChatServer {
 
 
-    @Autowired
-    MongoTemplate mongoTemplate;
-
     /**
      * 全部在线会话  PS: 基于场景考虑 这里使用线程安全的Map存储会话对象。
      */
@@ -47,7 +44,6 @@ public class WebSocketChatServer {
     @OnMessage
     public void onMessage(Session session, String jsonStr) {
         Message message = JSON.parseObject(jsonStr, Message.class);
-        mongoTemplate.insert(message);
         sendMessageToAll(Message.jsonStr(Message.SPEAK, message.getUsername(), message.getMsg(), onlineSessions.size()));
     }
 
