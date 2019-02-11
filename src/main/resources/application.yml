@@ -93,6 +93,12 @@ spring:
       username:
       password:
 
+  # thymeleaf and static resource
+  thymeleaf:
+    check-template: true
+    suffix: .html
+    prefix: classpath:/templates/
+
 # server port
 server:
   port: 9091
@@ -112,7 +118,6 @@ dubbo:
   protocol:
     name: dubbo
     port: 20880
-
 
 
 mybatis:
