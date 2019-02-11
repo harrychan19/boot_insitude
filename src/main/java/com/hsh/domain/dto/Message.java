@@ -3,6 +3,7 @@ package com.hsh.domain.dto;
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author hushihai
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @AllArgsConstructor
 @Data
+@Document(collection = "chat_log")
 public class Message {
 
     public static final String ENTER = "ENTER";
