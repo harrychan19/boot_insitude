@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -48,7 +47,7 @@ public class BootInsitudeApplication {
         }
         ModelAndView mav = new ModelAndView("chat");
         mav.addObject("username", username);
-        mav.addObject("webSocketUrl", "ws://"+ InetAddress.getLocalHost().getHostAddress()+":"+request.getServerPort()+request.getContextPath()+"/chat");
+        mav.addObject("webSocketUrl", "ws://"+ "106.13.50.185" +":"+request.getServerPort()+request.getContextPath()+"/chat");
         return mav;
     }
 }
