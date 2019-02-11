@@ -3,7 +3,6 @@ package com.hsh.domain.dto;
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author hushihai
