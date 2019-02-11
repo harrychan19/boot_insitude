@@ -107,6 +107,24 @@
                     '<div class="mdui-card-content message-content">' + message.username + "：" + message.msg + '</div>' +
                     '</div></div>');
             }
+
+            if (message.type === 'ENTER') {
+                $messageContainer.append(
+                    '<div class="mdui-card" style="margin: 10px 0;">' +
+                    '<div class="mdui-card-primary">' +
+                    '<div class="mdui-card-content message-content">' + message.username + "进入了聊天室" + '</div>' +
+                    '</div></div>');
+            }
+
+
+            if (message.type === 'QUIT') {
+                $messageContainer.append(
+                    '<div class="mdui-card" style="margin: 10px 0;">' +
+                    '<div class="mdui-card-primary">' +
+                    '<div class="mdui-card-content message-content">' + message.username + "离开了聊天室" + '</div>' +
+                    '</div></div>');
+            }
+
             $('.chat-num').text(message.onlineCount);
             //防止刷屏
             var $cards = $messageContainer.children('.mdui-card:visible').toArray();
