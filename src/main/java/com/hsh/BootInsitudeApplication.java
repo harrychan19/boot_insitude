@@ -35,7 +35,7 @@ public class BootInsitudeApplication {
      */
     @GetMapping("/")
     public ModelAndView login() {
-        return new ModelAndView("/login");
+        return new ModelAndView("login");
     }
 
     /**
@@ -46,7 +46,7 @@ public class BootInsitudeApplication {
         if (StringUtils.isEmpty(username)) {
             username = "匿名用户";
         }
-        ModelAndView mav = new ModelAndView("/chat");
+        ModelAndView mav = new ModelAndView("chat");
         mav.addObject("username", username);
         mav.addObject("webSocketUrl", "ws://"+ InetAddress.getLocalHost().getHostAddress()+":"+request.getServerPort()+request.getContextPath()+"/chat");
         return mav;
