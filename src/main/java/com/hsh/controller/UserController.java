@@ -7,7 +7,11 @@ import com.hsh.service.mongo.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author hushihai
@@ -28,8 +32,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/insertUser")
-    public RestResult insertUser(@RequestBody User user){
+    public RestResult insertUser(@RequestBody @Valid User user, BindingResult bindingResult){
         try {
+            if(bindingResult.hasErrors()){
+                for (ObjectError objectError : bindingResult.getAllErrors()) {
+                    String defaultMessage = objectError.getDefaultMessage();
+                    return RestResult.failed(-1,defaultMessage);
+                }
+            }
             userService.insert(user);
             log.debug("添加用户信息成功!");
         }catch (Exception e){

@@ -3,6 +3,7 @@ package com.hsh.domain.mongo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -16,8 +17,10 @@ public class User implements Serializable{
     @Id
     private String id;
 
+    @NotBlank(message = "姓名不能为空")
     private String username;
 
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     private Integer age;

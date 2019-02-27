@@ -67,6 +67,14 @@ public class RestResult implements Serializable{
         return result;
     }
 
+    public static RestResult failed(int errCode,String errorMessage) {
+        RestResult result = new RestResult();
+        result.setSuccess(false);
+        result.setCode(errCode);
+        result.setErrorMessage(errorMessage);
+        return result;
+    }
+
     public boolean isSuccess() {
         return success;
     }
