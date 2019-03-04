@@ -87,8 +87,6 @@ public class ElasticStudentController {
             SearchSourceBuilder builder = new SearchSourceBuilder();
             QueryBuilder query = QueryBuilders.termQuery("name",name);
             builder.query(query);
-            builder.size(10);
-            builder.from(0);
             SearchResult result = jestService.blurSearch(ElasticIndexConfig.STU_INDEX,
                     ElasticIndexConfig.STU,
                     "name",
@@ -97,7 +95,7 @@ public class ElasticStudentController {
             List<ElasticStudent> students = result.getSourceAsObjectList(ElasticStudent.class, false);
             esPage = new EsPage(0,5,total.intValue(),students);
         } catch (Exception e) {
-            logger.error("aaaa",e);
+            logger.error("es查询错误",e);
             return RestResult.failed(ResultCode.INTERFACE_INNER_INVOKE_ERROR);
         }
         return RestResult.success(esPage);

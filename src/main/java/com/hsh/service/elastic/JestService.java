@@ -1,7 +1,7 @@
 package com.hsh.service.elastic;
 
 import com.google.gson.Gson;
-import com.hsh.common.utils.ESDoc;
+import com.hsh.common.utils.EsDoc;
 import com.hsh.common.utils.ElasticSearchResult;
 import com.hsh.common.utils.Pagination;
 import io.searchbox.client.JestClient;
@@ -33,6 +33,7 @@ import java.util.List;
  */
 
 @Service
+@SuppressWarnings("UnnecessaryLocalVariable")
 public class JestService {
 
     @Autowired
@@ -352,7 +353,7 @@ public class JestService {
      * @return 执行结果json
      * @throws IOException
      */
-    public JestResult insertDocument(String indexName, String type, ESDoc doc) throws IOException {
+    public JestResult insertDocument(String indexName, String type, EsDoc doc) throws IOException {
         Index index = new Index.Builder(doc).index(indexName).type(type).build();
         JestResult result = jestClient.execute(index);
         return result;
@@ -385,13 +386,11 @@ public class JestService {
      * @return
      * @throws IOException
      */
-    public JestResult bulkIndex(List<ESDoc> docs)
-            throws IOException {
+    public JestResult bulkIndex(List<EsDoc> docs) throws IOException {
         Bulk.Builder builder = new Bulk.Builder();
-        for (ESDoc doc : docs) {
+        for (EsDoc doc : docs) {
             builder.addAction(new Index.Builder(doc).index(doc.getIndex()).type(doc.getType()).build());
         }
-
         JestResult result = jestClient.execute(builder.build());
         return result;
     }
@@ -420,7 +419,7 @@ public class JestService {
      * @return
      * @throws IOException
      */
-    public JestResult updateDocument(String indexName, String type, ESDoc doc)
+    public JestResult updateDocument(String indexName, String type, EsDoc doc)
             throws IOException {
         Update update = new Update.Builder(doc).index(indexName).type(type).id(doc.getDocId()).build();
         JestResult result = jestClient.execute(update);
@@ -716,31 +715,9 @@ public class JestService {
      * @throws IOException
      */
     public SearchResult blurSearch(String indexName, String type, String field, String keyWord) throws IOException {
-        /*//方式一
-        QueryBuilder queryBuilder = QueryBuilders.fuzzyQuery(field+".keyword", keyWord);
-        Search search = new Search.Builder(queryBuilder.toString()).addIndex(indexName).addType(type).build();
-        //方式二
-        //Term term=new Term(field+".keyword", "*"+keyWord+"*");
-        WildcardQuery query=new WildcardQuery(term);
-        Search search = new Search.Builder(query.toString()).addIndex(indexName).addType(type).build();
-        //方式三
-        QueryBuilder queryBuilder = QueryBuilders.constantScoreQuery(QueryBuilders.termQuery(field+".keyword", "*"+keyWord+"*"));
-        Search search = new Search.Builder(
-                queryBuilder.toString())
-                .addIndex(indexName)
-                .addType(type).build();
-        //方式四
-        WildcardQueryBuilder queryBuilder = QueryBuilders.wildcardQuery(field+".keyword", "*"+keyWord+"*");
-        Search search = new Search.Builder(queryBuilder.toString())
-                .addIndex(indexName)
-                .addType(type).build();*/
-        //方式五：查询query（用API进行查询是对应视图工具上的json参数进行查询）
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        //QueryBuilder queryBuilder = QueryBuilders.wildcardQuery(field+".keyword", "*"+keyWord+"*");
         QueryBuilder queryBuilder = QueryBuilders.wildcardQuery(field, "*" + keyWord + "*");
-        //QueryBuilder queryBuilder = QueryBuilders.matchQuery(field,keyWord);
-        //分页查询
-        searchSourceBuilder.query(queryBuilder).size(MAX_SIZE).from(0).size(1);
+        searchSourceBuilder.query(queryBuilder).size(MAX_SIZE).from(0).size(2);
         String query = searchSourceBuilder.toString();
         System.out.println(query);
 
@@ -761,7 +738,7 @@ public class JestService {
      * @return
      * @throws IOException
      */
-    public <T extends ESDoc> List<T> scanAndScrollSearch(String indexName, String type, String query, Class<T> clazz)
+    public <T extends EsDoc> List<T> scanAndScrollSearch(String indexName, String type, String query, Class<T> clazz)
             throws IOException {
         List<T> ret = new ArrayList<T>();
         Search search = new Search.Builder(query)
@@ -804,7 +781,7 @@ public class JestService {
      * @param <T>
      * @return
      */
-    public <T extends ESDoc> T getESDoc(String index, String type, String id, Class<T> clazz) {
+    public <T extends EsDoc> T getESDoc(String index, String type, String id, Class<T> clazz) {
         try {
             JestResult result = getDocument(index, type, id);
             if (result.isSucceeded()) {
@@ -826,7 +803,7 @@ public class JestService {
      * @param clazz
      * @return
      */
-    public <T extends ESDoc> Pagination<T> searchPage(String index, String type, String query, Class<T> clazz) {
+    public <T extends EsDoc> Pagination<T> searchPage(String index, String type, String query, Class<T> clazz) {
         Pagination<T> ret = null;
         try {
             SearchResult result = simpleSearch(index, type, query);

@@ -1,7 +1,7 @@
 package com.hsh.domain.elastic;
 
 import com.hsh.common.config.ElasticIndexConfig;
-import com.hsh.common.utils.ESDoc;
+import com.hsh.common.utils.EsDoc;
 import io.searchbox.annotations.JestId;
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author hushihai
  * @version V1.0, 2018/11/11
  */
-public class ElasticStudent implements Serializable,ESDoc{
+public class ElasticStudent implements Serializable,EsDoc {
 
     private static final long serialVersionUID = 8780298315002628595L;
     @JestId
