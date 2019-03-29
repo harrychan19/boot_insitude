@@ -27,11 +27,11 @@ public class TkQuestionController {
         split = StringUtils.trim(split);
         List<TkPaperQuestion> paperQuestions = Lists.newArrayList();
         //从当前系统中获取换行符"
-        String[] questions = split.split("(" + "\n" + ")" + "{2,}");
+        String[] questions = split.split("(" + "\r\n" + ")" + "{2,}");
         for (String question : questions) {
             TkPaperQuestion paperQuestion = new TkPaperQuestion();
             TkQuestionDto questionDto = new TkQuestionDto();
-            String[] questionStrArr = question.split("\n");
+            String[] questionStrArr = question.split("\r\n");
             List<TkQuestionOption> options = Lists.newArrayList();
             for (int i = 0; i < questionStrArr.length; i++) {
                 if(i == 0){
