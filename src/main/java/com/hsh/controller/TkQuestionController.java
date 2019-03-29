@@ -27,7 +27,7 @@ public class TkQuestionController {
         split = StringUtils.trim(split);
         List<TkPaperQuestion> paperQuestions = Lists.newArrayList();
         //从当前系统中获取换行符"
-        String[] questions = split.split("[" + System.lineSeparator() + "]" + "{3,}");
+        String[] questions = split.split("(" + System.lineSeparator() + ")" + "{2,}");
         for (String question : questions) {
             TkPaperQuestion paperQuestion = new TkPaperQuestion();
             TkQuestionDto questionDto = new TkQuestionDto();
